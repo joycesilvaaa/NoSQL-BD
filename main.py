@@ -37,16 +37,16 @@ def main():
         print("-="*20)
 
         try:
-            opcao = int(input("Digite a opção desejada: "))
+            choice = int(input("Digite a opção desejada: "))
         except ValueError:
             print("Opção inválida! Escolha novamente.")
             continue
         
-        if opcao == 1:
-            manager_favorites(db_mongo,product_col, db_redis, user)
-        elif opcao == 2:
+        if choice == 1:
+            manager_favorites(product_col, db_redis, user,user_col)
+        elif choice == 2:
             manager_purchases(db_mongo,purchases_col, db_redis, user)
-        elif opcao == 0:
+        elif choice == 0:
             print("Saindo...")
             break
         else:

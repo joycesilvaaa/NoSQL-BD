@@ -8,7 +8,7 @@ def login(user_col, db_rendis, user_email, user_password):
     if user_password == user['senha']:
         db_rendis.setex(f'user: ${user_email}', 3600, user_email)
         print(f"Usuário {user_email} logado com sucesso por 1 hora!")
-        return user_email
+        return user
     else:
         print('Senha incorreta.')
         return None
