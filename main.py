@@ -17,9 +17,12 @@ def main():
     user_col = mercado_livre_db['userCol']
     purchases_col = mercado_livre_db['purchasesCol']
 
-    user = login(db_mongo, user_col, db_redis)
+    user_email = input('Digite seu e-mail: ')
+    user_password = input('Digite sua senha: ')
 
-    if user == False:
+    user = login(user_col, db_redis,user_email, user_password)
+
+    if user is None:
         return
 
     print("Bem-vindo ao Banco de Dados Do Mercado Livre")

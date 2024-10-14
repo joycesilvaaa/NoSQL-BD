@@ -6,7 +6,7 @@ def connection_mongo():
     client = MongoClient(uri, server_api=ServerApi('1'))
     try:
         client.admin.command('ping')  
-        print("Banco conectado!")
+        print("Mongo conectado!")
         return client  
     except Exception as e:
         print(f"Erro ao conectar ao banco: {e}")
