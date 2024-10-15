@@ -1,7 +1,7 @@
 from utils.utils import list_products, find_product, list_addresses, generate_nota_fical, calculate_final_value
 from datetime import datetime
 
-def add_purchase(product_col, purchase_col, user_col, db_redis, user):
+def add_purchase(product_col, purchase_col, db_redis, user):
     list_products(product_col)
 
     shopping_cart = []  

@@ -45,7 +45,7 @@ def main():
         if choice == 1:
             manager_favorites(product_col, db_redis, user,user_col)
         elif choice == 2:
-            manager_purchases(db_mongo,purchases_col, db_redis, user)
+            manager_purchases(product_col, purchases_col, db_redis, user, user_col)
         elif choice == 0:
             print("Saindo...")
             break
