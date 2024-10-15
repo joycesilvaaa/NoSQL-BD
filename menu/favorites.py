@@ -2,9 +2,15 @@ from ..service.favorites.add import add_favorite
 from ..service.favorites.remove import remove_favorite
 from ..service.favorites.sync import sync_favorites
 from ..service.favorites.list import list_favorites
+from ..service.auth import user_logged
 
 def manager_favorites(product_col, db_redis, user, user_col):
     while True:
+
+        if not user_logged(db_redis, user['email']):
+            print("Sessão expirada. Por favor, faça login novamente.")
+            return
+        
         print("-="*20)
         print("      Gerenciador de Favoritos")
         print("-="*20)

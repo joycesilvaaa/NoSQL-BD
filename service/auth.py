@@ -12,4 +12,7 @@ def login(user_col, db_rendis, user_email, user_password):
     else:
         print('Senha incorreta.')
         return None
+    
+def user_logged(db_redis, user_email):
+    return db_redis.exists(f'user: ${user_email}')
 

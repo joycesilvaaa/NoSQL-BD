@@ -2,7 +2,7 @@ from config.connection_rendis import connection_rendis
 from config.connection_mongo import connection_mongo
 from menu.favorites import manager_favorites
 from menu.purchases import manager_purchases
-from service.auth import login
+from service.auth import login, user_logged
 
 def main():
     db_mongo  = connection_mongo()
@@ -28,6 +28,11 @@ def main():
     print("Bem-vindo ao Banco de Dados Do Mercado Livre")
 
     while True:
+
+        if not user_logged(db_redis, user_email):
+            print("Sessão expirada. Por favor, faça login novamente.")
+            return
+
         print("-="*20)
         print("         Menu Principal")
         print("-="*20)
