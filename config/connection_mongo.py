@@ -2,7 +2,7 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
 def connection_mongo():
-    uri = "mongodb+srv://joyceaparecida20152:ZvZy9BCbSWMPPphA@cluster.ox6qa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster"
+    uri = "mongodb+srv://username:password@cluster.ox6qa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster"
     client = MongoClient(uri, server_api=ServerApi('1'))
     try:
         client.admin.command('ping')  

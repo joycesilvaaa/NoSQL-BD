@@ -5,7 +5,7 @@ def connection_rendis():
         r = redis.Redis(
         host='redis-17047.c308.sa-east-1-1.ec2.redns.redis-cloud.com',
         port=17047,
-        password='6HP4bULshzXJ5kNJn9MXuw0sKrKVBskN')
+        password='password')
         r.ping()
         print('Redis conectado!')
         return r 
