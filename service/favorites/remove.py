@@ -1,5 +1,5 @@
 from utils.utils import find_product
-from list import list_favorites
+from .list import list_favorites
 
 def remove_favorite(product_col, db_redis, user):
     list_favorites(db_redis, user)
@@ -10,7 +10,19 @@ def remove_favorite(product_col, db_redis, user):
         product = find_product(product_id, product_col)
 
         if product:
-            favorites_removed.append(product["_id"]) 
+            product_info = {
+                "_id":product["_id"],
+                "nome": product["nome"],
+                "marca": product["marca"],
+                "valor": product["valor"],
+                "vendedor": {
+                    "_id":product["vendedor"]["_id"],
+                    "cnpj": product["vendedor"]["cnpj"], 
+                    "nome": product["vendedor"]["nome"],
+                    "avaliacao": product["vendedor"]["avaliacao"]
+                }
+            }
+            favorites_removed.append(product_info) 
         else:
             print('Produto não encontrado!')
 
@@ -20,13 +32,13 @@ def remove_favorite(product_col, db_redis, user):
 
     redis_key = f"user:{user['_id']}:favorites"
 
-    for fav_id in favorites_removed:
-        result = db_redis.srem(redis_key, fav_id) 
+    for fav in favorites_removed:
+        result = db_redis.srem(redis_key, str(fav))
         
         if result > 0:
-            print(f"Produto {fav_id} removido dos favoritos com sucesso.")
+            print(f"Produto removido dos favoritos com sucesso.")
         else:
-            print(f"Produto {fav_id} não encontrado nos favoritos.")
+            print(f"Produto {fav} não encontrado nos favoritos.")
 
     print("-=" * 20)
 

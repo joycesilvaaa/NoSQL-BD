@@ -1,4 +1,4 @@
-from utils.utils import list_products, find_product, list_addresses, generate_nota_fical, calculate_final_value
+from utils.utils import list_products, find_product, list_addresses, generate_nota_fical, calculate_final_value, update_sale_and_stock
 from datetime import datetime
 
 def add_purchase(product_col, purchase_col, db_redis, user):
@@ -91,4 +91,12 @@ def add_purchase(product_col, purchase_col, db_redis, user):
     user_purchase_key = f"user:{user['_id']}:purchases"
     db_redis.rpush(user_purchase_key, redis_key) 
 
+    for item in shopping_cart:
+        product = item["product"]
+        quantity = item["quantity"]
+        update_sale_and_stock(product, quantity, product_col)
+    print("-="*20)
     print("Compra realizada com sucesso!")
+    print("-="*20)
+
+    

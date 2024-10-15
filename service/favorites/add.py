@@ -5,7 +5,7 @@ def add_favorite(product_col, db_redis, user):
     favorites = []
 
     while True:
-        product_id = input('Digite o Id do produto que deseja favoritar: ')
+        product_id = input('Digite o Id do produto que deseja favoritar: ').strip()
         product = find_product(product_id, product_col)
 
         if product:

@@ -39,3 +39,10 @@ def calculate_final_value(product, quantity):
     value_product = float(product.get("valor"))
     final_value = value_product * quantity
     return round(final_value, 2)
+
+def update_sale_and_stock(product, quantity, product_col):
+    stock = int(product.get("estoque"))
+    sale = int(product.get("vendas"))
+    product["estoque"] = stock - quantity
+    product["vendas"] = sale + quantity
+    product_col.update_one({"_id":product["_id"]}, {"$set": {"estoque": product["estoque"], "vendas": product["vendas"]}})

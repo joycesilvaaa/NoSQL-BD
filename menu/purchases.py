@@ -1,7 +1,7 @@
-from ..service.purchases.add import add_purchase
-from ..service.purchases.sync import sync_purchases
-from ..service.purchases.list import list_purchases
-from ..service.auth import user_logged
+from service.purchases.add import add_purchase
+from service.purchases.sync import sync_purchases
+from service.purchases.list import list_purchases
+from service.auth import user_logged
 
 def manager_purchases(product_col, purchase_col, db_redis, user, user_col):
     while True:
