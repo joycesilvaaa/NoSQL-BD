@@ -1,4 +1,4 @@
-from cassandra.util import uuid4
+from uuid import uuid4
 
 def create_user(session):
     try:
@@ -10,7 +10,7 @@ def create_user(session):
         email = input("Email: ")
         cpf = input("CPF: ")
         senha = input("Senha: ")
-        endereco = []
+        enderecos = []
         while True:
             print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
             rua = input("Rua: ")
@@ -21,7 +21,7 @@ def create_user(session):
             cidade = input("Cidade: ")
             estado = input("Estado: ")
 
-            endereco.append({
+            enderecos.append({
                 "rua": rua,
                 "numero": numero,
                 "tipo_imovel": tipo_imovel,
@@ -38,10 +38,10 @@ def create_user(session):
         favoritos = []
         compras = []
         query = """
-            INSERT INTO user (user_id, nome, email, cpf, senha, endereco, favoritos, compras)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-        """
-        session.execute(query, (user_id, nome, email, cpf, senha, endereco, favoritos, compras))
+                INSERT INTO user (id, nome, email, cpf, senha, enderecos, favoritos, compras)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            """
+        session.execute(query, (user_id, nome, email, cpf, senha, enderecos, favoritos, compras))
         
         print(f"Usuário criado com sucesso! ID: {user_id}")
         return 
