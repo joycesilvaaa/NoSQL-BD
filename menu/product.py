@@ -1,4 +1,4 @@
-def manager_product():
+def manager_product(session):
     while True:
         print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
         print("1. Criar produto")

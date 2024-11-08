@@ -5,8 +5,8 @@ from menu.user import manager_user
 from menu.seller import manager_seller
 
 def main():
-    data_base = connection_cassandra()
-    if data_base is None:
+    cluster = connection_cassandra()
+    if cluster is None:
         print('Erro ao conectar ao Banco de Dados')
         return
     
@@ -29,13 +29,13 @@ def main():
 
         match choice:
             case 1:
-                manager_user()
+                manager_user(cluster)
             case 2:
-                manager_purchases()
+                manager_purchases(cluster)
             case 3:
-                manager_seller()
+                manager_seller(cluster)
             case 4:
-                manager_product()
+                manager_product(cluster)
             case 5:
                 print("Saindo...")
                 break

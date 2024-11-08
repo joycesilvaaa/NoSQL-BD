@@ -1,4 +1,4 @@
-def manager_purchases():
+def manager_purchases(session):
     while True:
         print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
         print("1. Criar compra")

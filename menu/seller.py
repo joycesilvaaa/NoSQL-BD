@@ -1,4 +1,4 @@
-def manager_seller():
+def manager_seller(session):
     while True:
         print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
         print("1. Criar vendedor")
