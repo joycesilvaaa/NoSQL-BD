@@ -1,12 +1,15 @@
 from service.user.create import create_user
 from service.user.update import update_user 
 from utils.utils import list_users
+from service.user.read import read_user
 def manager_user(session):
     while True:
         print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
         print("1. Criar usuario")
         print("2. Atualizar usuario")
-        print("3. Voltar ao menu principal")
+        print("3. Ver usuario")
+        print("4. Listagem de todos os usuarios")
+        print("5. Voltar ao menu principal")
         print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
 
         try:
@@ -27,4 +30,14 @@ def manager_user(session):
                 update_user(session, user_id)
                 break
             case 3:
+                users = list_users(session)
+                if users is None:
+                    break
+                user_id = input("Digite o ID do usuario: ").strip()
+                read_user(session, user_id)
+                break
+            case 4:
+                list_users(session)
+                break
+            case 5:
                 break
