@@ -2,44 +2,10 @@ def create_collection(session):
     try:
         session.execute("USE mercado_livre")
 
-        session.execute("""
-            CREATE TYPE IF NOT EXISTS produto(
-                produto_id UUID,
-                nome_produto TEXT,
-                marca_produto TEXT,
-                valor DECIMAL,
-                vendedor_id UUID,
-                nome_vendedor TEXT, 
-                email_vendedor TEXT,
-                cnpj_vendedor TEXT
-            )
-        """)
-
-        session.execute("""
-            CREATE TYPE IF NOT EXISTS compra (
-                produto_id UUID,
-                nome_produto TEXT,
-                marca_produto TEXT,
-                valor DECIMAL,
-                quantidade INT,
-                vendedor_id UUID,
-                nome_vendedor TEXT, 
-                email_vendedor TEXT,
-                cnpj_vendedor TEXT
-            )
-        """)
-
-        session.execute("""
-            CREATE TYPE IF NOT EXISTS endereco (
-                rua TEXT,
-                numero TEXT,
-                tipo_imovel TEXT,
-                complemento TEXT,
-                bairro TEXT,
-                cidade TEXT,
-                estado TEXT
-            )
-        """)
+        # session.execute("DROP TABLE IF EXISTS user")
+        # session.execute("DROP TABLE IF EXISTS purchase")
+        # session.execute("DROP TABLE IF EXISTS seller")
+        # session.execute("DROP TABLE IF EXISTS products")
 
         session.execute("""
             CREATE TABLE IF NOT EXISTS user (
@@ -48,20 +14,20 @@ def create_collection(session):
                 email TEXT,
                 cpf TEXT,
                 senha TEXT,
-                endereco LIST<FROZEN<endereco>>,  
-                favoritos LIST<FROZEN<produto>>,  
-                compras LIST<FROZEN<compra>>       
+                enderecos LIST<FROZEN<MAP<TEXT, TEXT>>>,  -- Lista de mapas congelados para endereços
+                favoritos LIST<FROZEN<MAP<TEXT, TEXT>>>,  -- Lista de mapas congelados para favoritos
+                compras LIST<FROZEN<MAP<TEXT, TEXT>>>     -- Lista de mapas congelados para compras
             )
         """)
 
         session.execute("""
             CREATE TABLE IF NOT EXISTS purchase (
                 id UUID PRIMARY KEY,
-                user_id UUID, 
+                user_id UUID,
                 data_compra TIMESTAMP,
                 valor_total DECIMAL,
-                produtos LIST<FROZEN<compra>>, 
-                endereco_entrega FROZEN<endereco>,
+                produtos LIST<FROZEN<MAP<TEXT, TEXT>>>,         -- Lista de produtos como mapas congelados
+                endereco_entrega FROZEN<MAP<TEXT, TEXT>>,       -- Endereço de entrega como mapa congelado
                 status TEXT
             )
         """)
@@ -73,8 +39,8 @@ def create_collection(session):
                 email TEXT,
                 cnpj TEXT,
                 avaliacao INT,
-                endereco LIST<FROZEN<endereco>>,  
-                produtos LIST<FROZEN<produto>>  
+                enderecos LIST<FROZEN<MAP<TEXT, TEXT>>>,  -- Lista de endereços como mapas congelados
+                produtos LIST<FROZEN<MAP<TEXT, TEXT>>>    -- Lista de produtos como mapas congelados
             )
         """)
 
@@ -86,13 +52,13 @@ def create_collection(session):
                 valor DECIMAL,
                 estoque INT,
                 vendas INT,
-                vendedor_id UUID, 
-                nome_vendedor TEXT, 
+                vendedor_id UUID,
+                nome_vendedor TEXT,
                 email_vendedor TEXT,
                 cnpj_vendedor TEXT
             )
         """)
-        return
+
+        print("Todas as tabelas foram criadas com sucesso.")
     except Exception as e:
-        print(f'Erro ao criar coleções: {e}')
-        return
+        print(f'Erro ao criar tabelas: {e}')
