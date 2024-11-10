@@ -1,6 +1,6 @@
 # Mercado Livre -MongoDB e Redis
 
-## Clone o projeto e mude para a branch `lista03`
+## Clone o projeto e acesse a branch `lista03`
 ```bash
 git clone https://github.com/joycesilvaaa/NoSQL-BD.git
 cd NoSQL-BD
