@@ -36,6 +36,7 @@ def row_to_dict_purchase(row):
         "data_compra": row.data_compra,  
         "valor_total": row.valor_total,
         "status": row.status,  
+        "user_id": row.user_id,
         "endereco_entrega": convert_ordered_map_to_dict(row.endereco_entrega) if row.endereco_entrega else {},
         "produtos": [convert_ordered_map_to_dict(produto) for produto in row.produtos] if row.produtos else []
     }
@@ -57,7 +58,7 @@ def get_seller(session, seller_id):
 
 def get_purchase(session, purchase_id):
     query = """
-        SELECT * FROM purchases WHERE id = %s
+        SELECT * FROM purchase WHERE id = %s
     """
     purchase = session.execute(query, (purchase_id,)).one()
     return purchase if purchase else None
@@ -80,7 +81,7 @@ def get_all_sellers(session):
     return list(sellers)
 
 def get_all_purchases(session):
-    query = "SELECT * FROM purchases"
+    query = "SELECT * FROM purchase"
     purchases = session.execute(query)  
     return list(purchases)
 
@@ -138,16 +139,15 @@ def list_products(session):
         print("Nenhum produto cadastrado.")
         return None
     for product in products:
-        product_dict = convert_ordered_map_to_dict(product)
         print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
-        print(f"| ID: {product.id}")  # ID do produto (índice 0)
-        print(f"| Nome: {product.nome_produto}")  # Nome do produto (índice 1)
-        print(f"| Valor: {product.valor:.2f}")  # Valor do produto (índice 3)
-        print(f"| Vendedor: {product.nome_vendedor}")  # Nome do vendedor (índice 7)
+        print(f"| ID: {product.id}") 
+        print(f"| Nome: {product.nome_produto}") 
+        print(f"| Valor: {product.valor:.2f}")  
+        print(f"| Vendedor: {product.nome_vendedor}")  
     return products
 
 def update_sale_and_stock(session, product_id, quantity):
-    query = f"SELECT estoque, vendas FROM products WHERE product_id = %s"
+    query = f"SELECT estoque, vendas FROM products WHERE id = %s"
     result = session.execute(query, (product_id,))
     if not result:
         print(f"Produto não encontrado.")
@@ -162,7 +162,7 @@ def update_sale_and_stock(session, product_id, quantity):
     update_query = f"""
             UPDATE products
             SET estoque = %s, vendas = %s
-            WHERE product_id = %s
+            WHERE id = %s
         """     
     session.execute(update_query, (new_estoque, new_vendas, product_id))
 
