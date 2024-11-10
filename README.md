@@ -1,5 +1,10 @@
 # Mercado Livre - Cassandra
-
+## Clone o projeto e acesse a branch `lista04`
+```bash
+git clone https://github.com/joycesilvaaa/NoSQL-BD.git
+cd NoSQL-BD
+git checkout lista04
+````
 
 ## 1. Criar um Cluster Cassandra chamado `mercado_livre`
 
