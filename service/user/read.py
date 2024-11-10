@@ -29,14 +29,17 @@ def read_user(session, user_id):
     if user_data['compras']:
         print("| Compras:")
         for compra in user_data['compras']:
-            print(f"- {compra}")
+            print(f"    ID da Compra: {compra['id']}")
+            print(f"    Data da Compra: {compra['data_compra']}")
+            print(f"    Valor Total: R$ {float(compra['valor_total']):.2f}")
+            print(f"    Status: {compra['status']}")
     else:
         print("| Compras: Nenhuma compra registrada")
 
     if user_data['enderecos']:
         print("| Endereços:")
         for endereco in user_data['enderecos']:
-            print(f"    - Rua: {endereco['rua']}, Número: {endereco['numero']}, Tipo de Imóvel: {endereco['tipo_imovel']}, Complemento: {endereco['complemento']},"
+            print(f"    Rua: {endereco['rua']}, Número: {endereco['numero']}, Tipo de Imóvel: {endereco['tipo_imovel']}, Complemento: {endereco['complemento']},"
                   f" Bairro: {endereco['bairro']}, Cidade: {endereco['cidade']}, Estado: {endereco['estado']}")
     else:
         print("| Endereços: Nenhum endereço registrado")

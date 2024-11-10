@@ -129,7 +129,7 @@ def list_purchases(session):
         print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
         print(f"| ID: {purchase_dict['id']}")
         print(f"| Data: {purchase_dict['data_compra']}")
-        print(f"| Valor: {purchase_dict['valor_total']}")
+        print(f"| Valor: R${purchase_dict['valor_total']}")
         print(f"| Comprador: {user_dict['nome']}")
     return purchases
 
@@ -142,7 +142,7 @@ def list_products(session):
         print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
         print(f"| ID: {product.id}") 
         print(f"| Nome: {product.nome_produto}") 
-        print(f"| Valor: {product.valor:.2f}")  
+        print(f"| Valor: R${product.valor:.2f}")  
         print(f"| Vendedor: {product.nome_vendedor}")  
     return products
 

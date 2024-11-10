@@ -4,26 +4,21 @@ from utils.utils import list_products, get_product, update_sale_and_stock, get_u
 
 def create_purchase(session, user_id):
     try:
-        # Gera ID para a nova compra
         purchase_id = uuid4() 
         print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
         print("Informe os dados da nova compra:")
         print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
-        
-        # Obtém dados do usuário
         user = get_user(session, UUID(user_id))
         if user is None:
             print("Usuário não encontrado!")
             return
         user_data = row_to_dict_user(user)
         
-        # Lista produtos disponíveis
         products = list_products(session)
         if not products:
             print("Sem produtos cadastrados no sistema.")
             return
         
-        # Coleta produtos da compra
         produtos = []
         while True:
             print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
@@ -39,7 +34,6 @@ def create_purchase(session, user_id):
                 print(f"Quantidade disponível para venda: {product.estoque}")
                 continue
             
-            # Formata o produto como `map<text, text>`
             produtos.append({
                 "produto_id": str(product_id),
                 "nome_produto": str(product.nome_produto),
@@ -50,8 +44,7 @@ def create_purchase(session, user_id):
             continuar = input("Deseja adicionar outro produto? (s/n): ")
             if continuar.lower() != 's':
                 break
-        
-        # Seleciona endereço de entrega
+
         print("-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-")
         print("Selecione um endereço de entrega:")
         
@@ -74,18 +67,14 @@ def create_purchase(session, user_id):
             print("Por favor, insira um número válido.")
             return
         
-        # Calcula o valor total da compra
         valor_total = sum(float(produto["preco_unitario"]) * int(produto["quantidade"]) for produto in produtos)
-        
-        # Gera informações para a compra
+
         data_compra = datetime.now()
-        
-        # Insere compra na tabela `purchase`
+
         query = """
             INSERT INTO purchase (id, user_id, data_compra, valor_total, produtos, endereco_entrega, status)
             VALUES (%s, %s, %s, %s, %s, %s, %s)
         """
-        # Converte `endereco_entrega` em `map<text, text>`
         endereco_formatado = {
             "rua": endereco_entrega.get("rua"),
             "bairro": endereco_entrega.get("bairro"),
@@ -99,7 +88,6 @@ def create_purchase(session, user_id):
         
         print(f"Compra realizada com sucesso! ID: {purchase_id}")
 
-        # Simplifica dados da compra para o campo `compras`
         compra_simplificada = {
             "id": str(purchase_id),
             "data_compra": data_compra.isoformat(),
@@ -107,7 +95,6 @@ def create_purchase(session, user_id):
             "status": "Processando"
         }
 
-        # Atualiza a lista de compras do usuário na tabela `user`
         compras = user_data['compras'] if user_data.get('compras') else []
         compras.append(compra_simplificada)
 
@@ -118,7 +105,6 @@ def create_purchase(session, user_id):
         """
         session.execute(query_update_user, (compras, UUID(user_id)))
 
-        # Atualiza o estoque para cada produto na compra
         for produto in produtos:
             update_sale_and_stock(session, UUID(produto["produto_id"]), int(produto["quantidade"]))
         
