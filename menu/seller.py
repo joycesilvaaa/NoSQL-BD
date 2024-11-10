@@ -20,16 +20,13 @@ def manager_seller(session):
         match choice:
             case 1:
                 create_seller(session)
-                break
             case 2:
                 sellers = list_sellers(session)
                 if sellers is None:
-                    break
+                    return
                 seller_id = input("Digite o ID do vendedor: ").strip()
                 read_seller(session, seller_id)
-                break
             case 3:
                 list_sellers(session)
-                break
             case 4:
                 break

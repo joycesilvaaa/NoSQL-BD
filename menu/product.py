@@ -24,16 +24,13 @@ def manager_product(session):
                     return
                 seller_id = input("Digite o Id do vendedor: ").strip()
                 create_product(session,seller_id)
-                break
             case 2:
                 products = list_products(session)
                 if products is None:
                     return
                 product_id = input("Digite o Id do produto: ").strip()
                 read_product(session, product_id)
-                break
             case 3:
                 list_products(session)
-                break
             case 4:
-                break
+                 break           

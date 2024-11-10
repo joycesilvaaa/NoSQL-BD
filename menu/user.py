@@ -21,23 +21,19 @@ def manager_user(session):
         match choice:
             case 1:
                 create_user(session)
-                break
             case 2:
                 users = list_users(session)
                 if users is None:
                     break
                 user_id = input("Digite o ID do usuario: ").strip()
                 update_user(session, user_id)
-                break
             case 3:
                 users = list_users(session)
                 if users is None:
                     break
                 user_id = input("Digite o ID do usuario: ").strip()
                 read_user(session, user_id)
-                break
             case 4:
                 list_users(session)
-                break
             case 5:
                 break

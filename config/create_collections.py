@@ -14,9 +14,9 @@ def create_collection(session):
                 email TEXT,
                 cpf TEXT,
                 senha TEXT,
-                enderecos LIST<FROZEN<MAP<TEXT, TEXT>>>,  -- Lista de mapas congelados para endereços
-                favoritos LIST<FROZEN<MAP<TEXT, TEXT>>>,  -- Lista de mapas congelados para favoritos
-                compras LIST<FROZEN<MAP<TEXT, TEXT>>>     -- Lista de mapas congelados para compras
+                enderecos LIST<FROZEN<MAP<TEXT, TEXT>>>, 
+                favoritos LIST<FROZEN<MAP<TEXT, TEXT>>>,  
+                compras LIST<FROZEN<MAP<TEXT, TEXT>>>    
             )
         """)
 
@@ -26,8 +26,8 @@ def create_collection(session):
                 user_id UUID,
                 data_compra TIMESTAMP,
                 valor_total DECIMAL,
-                produtos LIST<FROZEN<MAP<TEXT, TEXT>>>,         -- Lista de produtos como mapas congelados
-                endereco_entrega FROZEN<MAP<TEXT, TEXT>>,       -- Endereço de entrega como mapa congelado
+                produtos LIST<FROZEN<MAP<TEXT, TEXT>>>,     
+                endereco_entrega FROZEN<MAP<TEXT, TEXT>>,    
                 status TEXT
             )
         """)
@@ -39,8 +39,8 @@ def create_collection(session):
                 email TEXT,
                 cnpj TEXT,
                 avaliacao INT,
-                enderecos LIST<FROZEN<MAP<TEXT, TEXT>>>,  -- Lista de endereços como mapas congelados
-                produtos LIST<FROZEN<MAP<TEXT, TEXT>>>    -- Lista de produtos como mapas congelados
+                enderecos LIST<FROZEN<MAP<TEXT, TEXT>>>,
+                produtos LIST<FROZEN<MAP<TEXT, TEXT>>>   
             )
         """)
 

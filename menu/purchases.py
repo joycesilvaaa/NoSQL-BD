@@ -24,16 +24,13 @@ def manager_purchases(session):
                     break
                 user_id = input("Digite o ID do usuario: ").strip()
                 create_purchase(session, user_id)
-                break
             case 2:
                 list_purchases(session)
-                break
             case 3:
                 purchases = list_purchases(session)
                 if purchases is None:
                     return
                 purchase_id = input("Digite o Id da compra que deseja deletar: ").strip()
                 delete_purchase(session, purchase_id)
-                break
             case 4:
                 break
