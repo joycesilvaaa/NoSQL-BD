@@ -8,4 +8,6 @@ As atividades exploram diferentes abordagens e tecnologias de armazenamento e ge
 |   02   |  <a href="https://github.com/joycesilvaaa/NoSQL-BD/tree/lista02"> Visualizar </a> |   ✅  |
 |   03   |  <a href="https://github.com/joycesilvaaa/NoSQL-BD/tree/lista03"> Visualizar </a> |  ✅  |
 |   04   |  <a href="https://github.com/joycesilvaaa/NoSQL-BD/tree/lista04"> Visualizar </a> |  ✅  |
+|   05   |  <a href="https://github.com/joycesilvaaa/NoSQL-BD/tree/lista05"> Visualizar </a> |  ✅  |
 <br>
+
